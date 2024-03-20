@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `bankdb` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `bankdb`;
+CREATE DATABASE  IF NOT EXISTS `bankdatabase` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `bankdatabase`;
 -- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
--- Host: localhost    Database: bankdb
+-- Host: localhost    Database: bankdatabase
 -- ------------------------------------------------------
 -- Server version	8.0.30
 
@@ -18,6 +18,32 @@ USE `bankdb`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `account`
+--
+
+DROP TABLE IF EXISTS `account`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `account` (
+  `idaccount` int NOT NULL AUTO_INCREMENT,
+  `accountnumber` varchar(20) DEFAULT NULL,
+  `saldo` decimal(10,2) DEFAULT NULL,
+  `cardlimit` int DEFAULT NULL,
+  PRIMARY KEY (`idaccount`),
+  UNIQUE KEY `idaccount_UNIQUE` (`idaccount`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `account`
+--
+
+LOCK TABLES `account` WRITE;
+/*!40000 ALTER TABLE `account` DISABLE KEYS */;
+/*!40000 ALTER TABLE `account` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `accountcard`
 --
 
@@ -25,17 +51,16 @@ DROP TABLE IF EXISTS `accountcard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accountcard` (
-  `idaccountcard` int NOT NULL,
+  `idaccountcard` int NOT NULL AUTO_INCREMENT,
   `idcard` int NOT NULL,
   `idaccount` int NOT NULL,
   PRIMARY KEY (`idaccountcard`),
-  UNIQUE KEY `idaccount_UNIQUE` (`idaccount`),
   UNIQUE KEY `idcard_UNIQUE` (`idcard`),
-  KEY `accoutcard-account_idx` (`idaccount`),
+  UNIQUE KEY `idaccount_UNIQUE` (`idaccount`),
   KEY `accountcard-card_idx` (`idcard`),
   CONSTRAINT `accountcard-card` FOREIGN KEY (`idcard`) REFERENCES `card` (`idcard`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `accoutcard-account` FOREIGN KEY (`idaccount`) REFERENCES `account` (`idaccount`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,10 +85,9 @@ CREATE TABLE `card` (
   `doublecard` tinyint(1) DEFAULT NULL,
   `pin` varchar(255) DEFAULT NULL,
   `idaccount` int DEFAULT NULL,
-  `cardcol` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idcard`),
   UNIQUE KEY `idcard_UNIQUE` (`idcard`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,14 +108,14 @@ DROP TABLE IF EXISTS `transaction`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transaction` (
   `transactionid` int NOT NULL AUTO_INCREMENT,
-  `accountid` int DEFAULT NULL,
+  `idaccount` int DEFAULT NULL,
   `amount` decimal(10,2) DEFAULT NULL,
   `date` datetime DEFAULT NULL,
   `transaction_type` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`transactionid`),
-  KEY `fk-transaction-account1_idx` (`accountid`),
-  CONSTRAINT `fk-transaction-account1` FOREIGN KEY (`accountid`) REFERENCES `account` (`accountnumber`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  KEY `fk-transaction-account_idx` (`idaccount`),
+  CONSTRAINT `fk-transaction-account` FOREIGN KEY (`idaccount`) REFERENCES `account` (`idaccount`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +140,7 @@ CREATE TABLE `user` (
   `lname` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`iduser`),
   UNIQUE KEY `iduser_UNIQUE` (`iduser`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,17 +160,16 @@ DROP TABLE IF EXISTS `useraccount`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `useraccount` (
-  `iduseraccount` int NOT NULL,
+  `iduseraccount` int NOT NULL AUTO_INCREMENT,
   `iduser` int NOT NULL,
   `idaccount` int NOT NULL,
   PRIMARY KEY (`iduseraccount`),
-  UNIQUE KEY `idaccount_UNIQUE` (`idaccount`),
   UNIQUE KEY `iduser_UNIQUE` (`iduser`),
+  UNIQUE KEY `idaccount_UNIQUE` (`idaccount`),
   KEY `useraccount-user_idx` (`iduser`),
-  KEY `useraccount-account_idx` (`idaccount`),
   CONSTRAINT `useraccount-account` FOREIGN KEY (`idaccount`) REFERENCES `account` (`idaccount`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `useraccount-user` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,4 +190,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-19 13:31:03
+-- Dump completed on 2024-03-20 16:07:36
