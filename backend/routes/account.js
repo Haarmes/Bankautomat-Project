@@ -17,7 +17,7 @@ router.get('/', function (req, res) {
 
 /* GET one account. */
 router.get("/:id", function (req, res) {
-    account.getOneAccount(request.params.id, function (err, result) {
+    account.getOneAccount(req.params.id, function (err, result) {
         if (err) {
             console.log(err);
             res.send(err);

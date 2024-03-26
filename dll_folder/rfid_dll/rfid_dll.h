@@ -15,11 +15,14 @@ class RFID_DLL_EXPORT Rfid_dll : public QObject
 public:
     Rfid_dll(QObject * parent);
     ~Rfid_dll();
+    void rfidConnect();
+    void rfidDisconnect();
+
 private:
     QSerialPort *_serial;
-    QString portname = "COM3";
+    QString portname = "COM5";      // Tähän laitetaan oikea portin numero
 signals:
-    void rfidSignal(short);
+    void rfidSignal(QString);
 
 private slots:
     void handleRfidReadyread();

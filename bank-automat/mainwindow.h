@@ -20,8 +20,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
-    void handleRfid(short);
+public slots:
+    void handleRfid(QString);
 
 private:
     Ui::MainWindow *ui;
