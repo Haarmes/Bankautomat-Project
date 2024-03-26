@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ptr_rfiddll = new Rfid_dll(this);     //Luodaan uusi rfid olio (dll kansiossa sijaitsee)
+    ptr_rfiddll->rfidConnect(); //yhdistetään tai "avataan" rfid portti. eli laite on luku tilassa
 }
 
 MainWindow::~MainWindow()
@@ -14,7 +15,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::handleRfid(short number)
+void MainWindow::handleRfid(QString cardnumber)
 {
-    qDebug()<<number;
+    qDebug() << "mainWindown handle rfid";
+    qDebug() << cardnumber;
 }
