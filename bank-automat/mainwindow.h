@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSerialPort>
+#include <QSerialPortInfo>
+#include "rfid_dll.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,7 +20,14 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void handleRfid(short);
+
 private:
     Ui::MainWindow *ui;
+    short attemptsLeft;
+    short cardNumber;
+    short pinNumber;
+    Rfid_dll * ptr_rfiddll;
 };
 #endif // MAINWINDOW_H
