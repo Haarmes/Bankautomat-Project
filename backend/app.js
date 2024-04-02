@@ -4,7 +4,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var accountRouter = require('./routes/account');
 var userRouter = require('./routes/user');
 var cardRouter = require('./routes/card');
@@ -26,7 +25,6 @@ app.use('/login', loginRouter); //login pitää olla enne authentikaatio vaatimi
 
 //app.use(authenticateToken);     //tämän jälkeiset reitit vaativat authentikaation
 
-app.use('/users', usersRouter);
 app.use('/account', accountRouter);
 app.use('/user', userRouter);
 app.use('/card', cardRouter);
