@@ -3,7 +3,7 @@
 Rfid_dll::Rfid_dll(QObject * parent): QObject(parent) {
 
     qDebug()<<"RFID DLL luotu!";
-    _serial = new QSerialPort();
+    _serial = new QSerialPort(this);
     _serial->setPortName(portname);
     _serial->setBaudRate(QSerialPort::Baud9600);
     _serial->setDataBits(QSerialPort::Data8);
