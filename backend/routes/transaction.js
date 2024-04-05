@@ -1,6 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const transaction=require('../models/transaction_model');
+const connection = require('../database');
 
 // Handling GET requests to retrieve all transactions
 router.get('/', function(request,response){
@@ -63,6 +64,21 @@ router.delete('/:id', function(request, response){
         }
     });
 });
+
+// ---------- Procedure, Transaction History---------
+
+router.get('/history/:id', function(request, response) {
+    transaction.getTransactionHistoryById(request.params.id, function(err, result) {
+        if (err) {
+            response.send(err); 
+        } else {
+            const firstResult = Array.isArray(result) ? result[0] : result;
+            response.json(firstResult);
+        }
+    });
+});
+
+
 
 
 
