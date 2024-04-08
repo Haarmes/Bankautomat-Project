@@ -64,4 +64,21 @@ router.delete('/:id', function (req, res) {
         }
     });
 });
+
+
+
+// procedure saldo
+router.get('/saldo/:id', function(request, response) {
+    account.getSaldoProcedureById(request.params.id, function(err, result){
+        if(err){
+            response.send(err);
+        }
+        else{
+            const firstResult = Array.isArray(result) ? result[0] : result;
+            response.json(firstResult);
+        }
+    });
+});
+
+
 module.exports = router;

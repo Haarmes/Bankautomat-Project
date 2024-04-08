@@ -15,7 +15,14 @@ const account = {
     },
     deleteAccount(id, callback) {
         return db.query("DELETE FROM account where idaccount=?", [id], callback)
+    },
+
+
+    //saldo procedure
+    getSaldoProcedureById(id, callback) {
+        return db.query("CALL saldoProcedure(?)", [id], callback);
     }
+
 }
 
 module.exports = account;
