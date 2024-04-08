@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `bankdatabase` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `bankdatabase`;
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: bankdatabase
 -- ------------------------------------------------------
@@ -31,7 +31,7 @@ CREATE TABLE `account` (
   `cardlimit` int DEFAULT NULL,
   PRIMARY KEY (`idaccount`),
   UNIQUE KEY `idaccount_UNIQUE` (`idaccount`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES (1,'12345',1000.00,0),(2,'11111',50000.00,0),(3,'141414141',1.00,1000);
+INSERT INTO `account` VALUES (1,'12345',0.00,0),(2,'11111',49400.00,0),(3,'141414141',1000.00,1000);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +117,7 @@ CREATE TABLE `transaction` (
   PRIMARY KEY (`transactionid`),
   KEY `fk-transaction-account_idx` (`idaccount`),
   CONSTRAINT `fk-transaction-account` FOREIGN KEY (`idaccount`) REFERENCES `account` (`idaccount`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,6 +126,7 @@ CREATE TABLE `transaction` (
 
 LOCK TABLES `transaction` WRITE;
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
+INSERT INTO `transaction` VALUES (1,1,100.00,'2024-05-19 10:00:00',NULL),(2,2,200.00,'2024-02-10 00:00:00',NULL),(3,3,300.00,'2024-03-10 00:00:00',NULL),(4,1,50.00,'2024-01-11 00:00:00',NULL),(5,1,20.00,'2023-02-03 00:00:00',NULL),(6,1,10.00,'2022-01-02 00:00:00',NULL),(7,1,5.00,'2021-02-02 00:00:00',NULL),(8,1,15.00,'2020-01-01 00:00:00',NULL),(9,1,200.00,'2024-04-05 17:34:36','nosto'),(10,1,200.00,'2024-04-05 17:35:34','nosto'),(11,2,200.00,'2024-04-05 17:35:56','nosto'),(12,2,200.00,'2024-04-05 17:38:37','nosto'),(13,2,200.00,'2024-04-05 17:38:38','nosto'),(14,1,200.00,'2024-04-05 17:38:58','nosto'),(15,1,200.00,'2024-04-05 17:38:59','nosto'),(16,3,200.00,'2024-04-05 17:44:44','nosto'),(17,3,801.00,'2024-04-05 17:48:39','nostoCredit');
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,7 +181,7 @@ CREATE TABLE `useraccount` (
 
 LOCK TABLES `useraccount` WRITE;
 /*!40000 ALTER TABLE `useraccount` DISABLE KEYS */;
-INSERT INTO `useraccount` VALUES (1,1,1),(5,1,2);
+INSERT INTO `useraccount` VALUES (1,1,1),(5,2,2);
 /*!40000 ALTER TABLE `useraccount` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -193,4 +194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-02 14:26:12
+-- Dump completed on 2024-04-08  8:51:21
