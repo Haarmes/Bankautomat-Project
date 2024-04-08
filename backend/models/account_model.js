@@ -21,6 +21,19 @@ const account = {
     //saldo procedure
     getSaldoProcedureById(id, callback) {
         return db.query("CALL saldoProcedure(?)", [id], callback);
+    },
+
+    // nostoDebit procedure
+    updateDebitSaldoProcedureById(id, nosto, callback) {
+        return db.query("Call nostoDebit(?,?)", [id, nosto], callback);
+    },
+    // nostoCredit procedure
+    updateCreditSaldoProcedureById(id, nosto, callback) {
+        return db.query("Call nostoCredit(?,?)", [id, nosto], callback);
+    },
+    // Talletus procedure
+    updateTalletusProcedureById(id, talletus, callback) {
+        return db.query("Call talletus(?,?)", [id, talletus], callback);
     }
 
 }
