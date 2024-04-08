@@ -1,4 +1,4 @@
-QT       += core gui serialport
+QT       += core gui serialport network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -10,16 +10,28 @@ CONFIG += c++17
 
 SOURCES += \
     bankmenuwindow.cpp \
+    cardselect.cpp \
+    debositmoneywindow.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    showbalancewindow.cpp \
+    withdrawmoneywindow.cpp
 
 HEADERS += \
     bankmenuwindow.h \
-    mainwindow.h
+    cardselect.h \
+    debositmoneywindow.h \
+    mainwindow.h \
+    showbalancewindow.h \
+    withdrawmoneywindow.h
 
 FORMS += \
     bankmenuwindow.ui \
-    mainwindow.ui
+    cardselect.ui \
+    debositmoneywindow.ui \
+    mainwindow.ui \
+    showbalancewindow.ui \
+    withdrawmoneywindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

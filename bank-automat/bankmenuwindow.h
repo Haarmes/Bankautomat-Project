@@ -1,8 +1,9 @@
 #ifndef BANKMENUWINDOW_H
 #define BANKMENUWINDOW_H
 
+
 #include <QMainWindow>
-#include <QDebug>
+#include <QWidget>
 
 namespace Ui {
 class BankMenuWindow;

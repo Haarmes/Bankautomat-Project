@@ -4,7 +4,13 @@
 #include <QMainWindow>
 #include <QSerialPort>
 #include <QSerialPortInfo>
+#include <QtNetwork>
+#include <QNetworkAccessManager>
+#include <QJsonDocument>
 #include "rfid_dll.h"
+#include "bankmenuwindow.h"
+#include "cardselect.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -23,11 +29,30 @@ public:
 public slots:
     void handleRfid(QString);
 
+private slots:
+
+    //Väliaikaiset napit. poistetaan lopullisesta
+    void on_btnTempOpenBankMenuUI_clicked();
+    void on_btnTempOpenCardSelectUI_clicked();
+
 private:
+    //ikkunat
     Ui::MainWindow *ui;
+    BankMenuWindow *bankmenuw;
+    CardSelect *cardSelectW;
+
+    //dll
+    Rfid_dll * ptr_rfiddll;
+
+    //muuttujia
     short attemptsLeft;
     short cardNumber;
     short pinNumber;
-    Rfid_dll * ptr_rfiddll;
+
+    //network
+    QNetworkAccessManager *getManager;
+    QNetworkReply *reply;
+    QByteArray response_data;
+
 };
 #endif // MAINWINDOW_H

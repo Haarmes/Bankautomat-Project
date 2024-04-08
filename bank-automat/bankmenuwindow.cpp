@@ -17,11 +17,13 @@ BankMenuWindow::BankMenuWindow(QWidget *parent)
         if(buttonPtr)
             connect(buttonPtr, &QPushButton::clicked, this, &BankMenuWindow::buttonHandler); // yhdistää löydetyn buttonin buttonHandler funktioon
     }
+    qDebug() << "BankMenuWindow Constructed";
 }
 
 BankMenuWindow::~BankMenuWindow()
 {
     delete ui;
+    qDebug() << "BankMenuWindow Destructed";
 }
 
 void BankMenuWindow::buttonHandler()
