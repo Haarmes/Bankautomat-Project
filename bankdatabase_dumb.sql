@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `bankdatabase` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `bankdatabase`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: bankdatabase
@@ -40,7 +38,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES (1,'12345',0.00,0),(2,'11111',49400.00,0),(3,'141414141',1000.00,1000);
+INSERT INTO `account` VALUES (1,'12345',855.00,NULL),(2,'11111',49000.00,NULL),(3,'141414141',600.00,1000);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +115,7 @@ CREATE TABLE `transaction` (
   PRIMARY KEY (`transactionid`),
   KEY `fk-transaction-account_idx` (`idaccount`),
   CONSTRAINT `fk-transaction-account` FOREIGN KEY (`idaccount`) REFERENCES `account` (`idaccount`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +124,7 @@ CREATE TABLE `transaction` (
 
 LOCK TABLES `transaction` WRITE;
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
-INSERT INTO `transaction` VALUES (1,1,100.00,'2024-05-19 10:00:00',NULL),(2,2,200.00,'2024-02-10 00:00:00',NULL),(3,3,300.00,'2024-03-10 00:00:00',NULL),(4,1,50.00,'2024-01-11 00:00:00',NULL),(5,1,20.00,'2023-02-03 00:00:00',NULL),(6,1,10.00,'2022-01-02 00:00:00',NULL),(7,1,5.00,'2021-02-02 00:00:00',NULL),(8,1,15.00,'2020-01-01 00:00:00',NULL),(9,1,200.00,'2024-04-05 17:34:36','nosto'),(10,1,200.00,'2024-04-05 17:35:34','nosto'),(11,2,200.00,'2024-04-05 17:35:56','nosto'),(12,2,200.00,'2024-04-05 17:38:37','nosto'),(13,2,200.00,'2024-04-05 17:38:38','nosto'),(14,1,200.00,'2024-04-05 17:38:58','nosto'),(15,1,200.00,'2024-04-05 17:38:59','nosto'),(16,3,200.00,'2024-04-05 17:44:44','nosto'),(17,3,801.00,'2024-04-05 17:48:39','nostoCredit');
+INSERT INTO `transaction` VALUES (1,1,100.00,'2024-05-19 10:00:00',NULL),(2,2,200.00,'2024-02-10 00:00:00',NULL),(3,3,300.00,'2024-03-10 00:00:00',NULL),(4,1,50.00,'2024-01-11 00:00:00',NULL),(5,1,20.00,'2023-02-03 00:00:00',NULL),(6,1,10.00,'2022-01-02 00:00:00',NULL),(7,1,5.00,'2021-02-02 00:00:00',NULL),(8,1,15.00,'2020-01-01 00:00:00',NULL),(9,1,200.00,'2024-04-05 17:34:36','nosto'),(10,1,200.00,'2024-04-05 17:35:34','nosto'),(11,2,200.00,'2024-04-05 17:35:56','nosto'),(12,2,200.00,'2024-04-05 17:38:37','nosto'),(13,2,200.00,'2024-04-05 17:38:38','nosto'),(14,1,200.00,'2024-04-05 17:38:58','nosto'),(15,1,200.00,'2024-04-05 17:38:59','nosto'),(16,3,200.00,'2024-04-05 17:44:44','nosto'),(17,3,801.00,'2024-04-05 17:48:39','nostoCredit'),(18,3,200.00,'2024-04-08 11:07:31','nostoDebit'),(19,3,801.00,'2024-04-08 11:07:49','nostoCredit'),(20,1,1.00,'2024-04-08 11:51:31','nostoDebit'),(21,1,1.00,'2024-04-08 12:12:33','nostoDebit'),(22,1,10.00,'2024-04-08 12:32:33','nostoDebit'),(23,1,9.00,'2024-04-08 12:34:03','nostoDebit'),(24,2,400.00,'2024-04-08 12:34:47','nostoDebit'),(25,1,5.00,'2024-04-08 12:35:49','nostoCredit'),(26,1,5.00,'2024-04-08 12:39:24','nostoDebit'),(27,1,5.00,'2024-04-08 12:41:23','nostoDebit'),(28,1,5.00,'2024-04-08 12:45:37','nostoCredit'),(29,1,5.00,'2024-04-08 15:15:48','nostoDebit'),(30,3,5.00,'2024-04-08 15:20:56','nostoCredit'),(31,3,5.00,'2024-04-08 15:21:06','nostoCredit'),(32,3,5.00,'2024-04-08 15:26:47','nostoCredit'),(33,1,100.00,'2024-04-08 15:38:41','Rahan talletus'),(34,1,100.00,'2024-04-08 15:39:11','Rahan talletus'),(35,3,5.00,'2024-04-08 15:42:21','Rahan talletus'),(36,3,5.00,'2024-04-08 15:43:27','Rahan talletus'),(37,3,5.00,'2024-04-08 15:43:35','Rahan talletus');
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,15 +196,21 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `nostoCredit`(IN first_id INT, IN nosto INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `nostoCredit`(IN first_id INT, IN nosto decimal(10,2))
 BEGIN 
 	DECLARE test1 INT DEFAULT 0;
+    DECLARE card_limit INT;
+	SELECT cardlimit INTO card_limit FROM account WHERE idaccount = first_id;
+	IF card_limit <> 0 THEN
 	START TRANSACTION;
 	UPDATE account SET saldo=saldo-nosto WHERE idaccount=first_id AND saldo + cardlimit >= nosto;
     SET test1=ROW_COUNT();
     IF (test1 > 0) THEN
-		COMMIT;
-		INSERT INTO transaction (idaccount, amount, date, transaction_type) VALUES (first_id, nosto, NOW(), 'nostoCredit'); 
+			COMMIT;
+			INSERT INTO transaction (idaccount, amount, date, transaction_type) VALUES (first_id, nosto, NOW(), 'nostoCredit'); 
+		ELSE
+			ROLLBACK;
+		END IF;
     ELSE
 		ROLLBACK;
 	END IF;
@@ -226,7 +230,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `nostoDebit`(IN first_id INT, IN nosto INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `nostoDebit`(IN first_id INT, IN nosto decimal(10,2))
 BEGIN 
 	DECLARE test1 INT DEFAULT 0;
 	START TRANSACTION;
@@ -271,6 +275,34 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `talletus` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `talletus`(IN first_id INT, IN talletus decimal(10,2))
+BEGIN 
+	DECLARE test1 INT DEFAULT 0;
+	START TRANSACTION;
+	UPDATE account SET saldo=saldo+talletus WHERE idaccount=first_id;
+    SET test1=ROW_COUNT();
+    IF (test1 > 0) THEN
+		COMMIT;
+		INSERT INTO transaction (idaccount, amount, date, transaction_type) VALUES (first_id, talletus, NOW(), 'Rahan talletus'); 
+    ELSE
+		ROLLBACK;
+	END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `transactionHistory` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -301,4 +333,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-08  9:06:27
+-- Dump completed on 2024-04-08 15:49:19
