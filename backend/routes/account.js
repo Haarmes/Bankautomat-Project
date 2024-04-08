@@ -81,4 +81,40 @@ router.get('/saldo/:id', function(request, response) {
 });
 
 
+// procedure NostoDebit
+router.put('/NostoDeb/:id/:amount', function(request, response) {
+    account.updateDebitSaldoProcedureById(request.params.id, request.params.amount, function(err, result){
+        if(err){
+            response.send(err);
+        }
+        else{
+            response.json(result);
+        }
+    });
+});
+// procedure NostoCredit
+router.put('/NostoCred/:id/:amount', function(request, response) {
+    account.updateCreditSaldoProcedureById(request.params.id, request.params.amount, function(err, result){
+        if(err){
+            response.send(err);
+        }
+        else{
+            response.json(result);
+        }
+    });
+});
+// procedure Talletus
+router.put('/Talletus/:id/:amount', function(request, response) {
+    account.updateTalletusProcedureById(request.params.id, request.params.amount, function(err, result){
+        if(err){
+            response.send(err);
+        }
+        else{
+            response.json(result);
+        }
+    });
+});
+
+
+
 module.exports = router;
