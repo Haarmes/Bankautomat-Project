@@ -17,11 +17,13 @@ BankMenuWindow::BankMenuWindow(QWidget *parent)
         if(buttonPtr)
             connect(buttonPtr, &QPushButton::clicked, this, &BankMenuWindow::buttonHandler); // yhdistää löydetyn buttonin buttonHandler funktioon
     }
+    qDebug() << "BankMenuWindow Constructed";
 }
 
 BankMenuWindow::~BankMenuWindow()
 {
     delete ui;
+    qDebug() << "BankMenuWindow Destructed";
 }
 
 void BankMenuWindow::buttonHandler()
@@ -50,3 +52,24 @@ void BankMenuWindow::buttonHandler()
         qDebug() << "Button pressed: " << name;
     }
 }
+
+void BankMenuWindow::on_btnWithdraw_clicked()
+{
+    withmoneyw = new WithdrawMoneyWindow(); // Withdraw money window
+    withmoneyw->show();
+}
+
+
+void BankMenuWindow::on_btnDeposit_clicked()
+{
+    depomoneyw = new DebositMoneyWindow(); // Deposite money window
+    depomoneyw->show();
+}
+
+
+void BankMenuWindow::on_btnBalance_clicked()
+{
+    showbalaw = new ShowBalanceWindow(); // Show Balance window
+    showbalaw->show();
+}
+

@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const jwt = require('jsonwebtoken');
 
 var indexRouter = require('./routes/index');
 var accountRouter = require('./routes/account');
@@ -11,6 +12,8 @@ var accCardRouter = require('./routes/accountcard');
 var userAccRouter = require('./routes/useraccount');
 var loginRouter = require('./routes/login');
 var transactionRouter = require('./routes/transaction');
+var debitRouter = require('./routes/debit');
+var creditRouter = require('./routes/credit');
 
 var app = express();
 
@@ -25,12 +28,16 @@ app.use('/login', loginRouter); //login pitää olla enne authentikaatio vaatimi
 
 //app.use(authenticateToken);     //tämän jälkeiset reitit vaativat authentikaation
 
+app.use('/useraccount', userAccRouter);
 app.use('/account', accountRouter);
 app.use('/user', userRouter);
 app.use('/card', cardRouter);
 app.use('/accountcard', accCardRouter);
 app.use('/useraccount', userAccRouter);
 app.use('/transaction', transactionRouter);
+app.use('/debit', debitRouter);
+app.use('/credit', creditRouter);
+
 
 
 
