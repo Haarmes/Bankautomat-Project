@@ -313,10 +313,10 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `transactionHistory`(IN account_id INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `transactionHistory`(IN account_id INT, IN offset_val INT)
 BEGIN 
 SELECT date AS 'Tapahtuma aika', amount AS 'Summa' FROM bankdatabase.transaction WHERE idaccount = account_id ORDER BY date DESC
-LIMIT 10;
+LIMIT 10 OFFSET offset_val;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;

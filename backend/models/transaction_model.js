@@ -28,10 +28,9 @@ const transaction={
         return db.query("DELETE FROM transaction WHERE transactionid=?", [id], callback);
     },
 
-    
     // Procedure
-    getTransactionHistoryById(id, callback) {
-        return db.query("CALL transactionHistory(?)", [id], callback);
+    getTransactionHistoryById(id, offset, callback) {
+        return db.query("CALL transactionHistory(?, ?)", [id, offset], callback);
     },
 }
 

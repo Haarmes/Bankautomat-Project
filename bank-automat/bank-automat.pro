@@ -1,4 +1,5 @@
 QT       += core gui serialport network
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,6 +16,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     showbalancewindow.cpp \
+    transactionwindow.cpp \
     withdrawmoneywindow.cpp
 
 HEADERS += \
@@ -23,6 +25,7 @@ HEADERS += \
     debositmoneywindow.h \
     mainwindow.h \
     showbalancewindow.h \
+    transactionwindow.h \
     withdrawmoneywindow.h
 
 FORMS += \
@@ -31,6 +34,7 @@ FORMS += \
     debositmoneywindow.ui \
     mainwindow.ui \
     showbalancewindow.ui \
+    transactionwindow.ui \
     withdrawmoneywindow.ui
 
 # Default rules for deployment.
