@@ -7,7 +7,7 @@ BankMenuWindow::BankMenuWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    const QStringList buttonList = {"withdraw", "deposit", "balance", "transaction", "logout"};
+    const QStringList buttonList = {"btnWithdraw", "btnDeposit", "btnBalance", "btnTransaction", "btnLogout"};
     QPushButton *buttonPtr;
 
     for(const QString& buttonName : buttonList)
@@ -31,23 +31,23 @@ void BankMenuWindow::buttonHandler()
     QPushButton * button = qobject_cast<QPushButton*>(sender());
     QString name = button->objectName();
 
-    if(name == "withdraw")
+    if(name == "btnWithdraw")
     {
         qDebug() << "Button pressed: " << name;
     }
-    else if(name == "deposit")
+    else if(name == "btnDeposit")
     {
         qDebug() << "Button pressed: " << name;
     }
-    else if(name == "balance")
+    else if(name == "btnBalance")
     {
         qDebug() << "Button pressed: " << name;
     }
-    else if(name == "transaction")
+    else if(name == "btnTransaction")
     {
         qDebug() << "Button pressed: " << name;
     }
-    else if(name == "logout")
+    else if(name == "btnLogout")
     {
         qDebug() << "Button pressed: " << name;
     }
@@ -59,13 +59,11 @@ void BankMenuWindow::on_btnWithdraw_clicked()
     withmoneyw->show();
 }
 
-
 void BankMenuWindow::on_btnDeposit_clicked()
 {
     depomoneyw = new DebositMoneyWindow(); // Deposite money window
     depomoneyw->show();
 }
-
 
 void BankMenuWindow::on_btnBalance_clicked()
 {
@@ -73,3 +71,8 @@ void BankMenuWindow::on_btnBalance_clicked()
     showbalaw->show();
 }
 
+void BankMenuWindow::on_btnTransaction_clicked()
+{
+    showtransw = new TransactionWindow(); // Show Transaction window
+    showtransw->show();
+}

@@ -1,7 +1,6 @@
 #ifndef BANKMENUWINDOW_H
 #define BANKMENUWINDOW_H
 
-
 #include <QMainWindow>
 #include <QWidget>
 #include <QtNetwork>
@@ -10,6 +9,7 @@
 #include "debositmoneywindow.h"
 #include "showbalancewindow.h"
 #include "withdrawmoneywindow.h"
+#include "transactionwindow.h"
 
 namespace Ui {
 class BankMenuWindow;
@@ -32,11 +32,14 @@ private slots:
 
     void on_btnBalance_clicked();
 
+    void on_btnTransaction_clicked();
+
 private:
     Ui::BankMenuWindow *ui;
     WithdrawMoneyWindow *withmoneyw;
     DebositMoneyWindow *depomoneyw;
     ShowBalanceWindow *showbalaw;
+    TransactionWindow *showtransw;
 };
 
 #endif // BANKMENUWINDOW_H

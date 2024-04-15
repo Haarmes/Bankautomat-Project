@@ -68,7 +68,7 @@ router.delete('/:id', function(request, response){
 // ---------- Procedure, Transaction History---------
 
 router.get('/history/:id', function(request, response) {
-    transaction.getTransactionHistoryById(request.params.id, function(err, result) {
+    transaction.getTransactionHistoryById(request.params.id, request.query.offset, function(err, result) {
         if (err) {
             response.send(err); 
         } else {
