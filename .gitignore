@@ -3,5 +3,7 @@ bank-automat/build/
 bank-automat/*.user
 dll_folder/rfid_dll/build/
 dll_folder/rfid_dll/*.user
+dll_folder/pinUIDLL/build/
+dll_folder/pinUIDLL/*.user
 
 .env
