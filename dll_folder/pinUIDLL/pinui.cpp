@@ -24,6 +24,9 @@ pinUI::pinUI(QWidget *parent) :
     connect(ui->btnEnter, SIGNAL(clicked(bool)),this,SLOT(onbtnEnterClicked()));
     connect(ui->btnCancel, SIGNAL(clicked(bool)),this,SLOT(onbtnCancelClicked()));
 
+    //Connection to parent (bank-automat)
+    connect(this, SIGNAL(PinEntered(QString)), this->parent(), SLOT(handlePinUi(QString)));
+
     userPIN = "";
 
 }
@@ -36,7 +39,6 @@ pinUI::~pinUI()
 void pinUI::onbtnEnterClicked()
 {
     qDebug()<<"Verifying PIN";
-    QString userPIN = ui->userPINfield->text();
     emit PinEntered(userPIN);
 
 }
@@ -55,7 +57,7 @@ void pinUI::numberClicked()
         if(userPIN.length() < 4){
             userPIN += digit;
 
-            ui->userPINfield->setText(ui->userPINfield->text()+digit);
+            ui->userPINfield->setText(ui->userPINfield->text()+"*");
         }
     }
 }

@@ -1,12 +1,15 @@
 #include "cardselect.h"
 #include "ui_cardselect.h"
 
-CardSelect::CardSelect(QWidget *parent)
-    : QWidget(parent)
+CardSelect::CardSelect(QWidget *parent, QString token)
+    : QDialog(parent)
     , ui(new Ui::CardSelect)
 {
     ui->setupUi(this);
     qDebug() << "CardSelect ui Constructed";
+    connect(this, SIGNAL(cardSelectSignal(QString)), this->parent(), SLOT(handleCardSelect(QString)));
+    qDebug() << token;
+    webToken = token;
 }
 
 CardSelect::~CardSelect()
@@ -20,8 +23,20 @@ void CardSelect::creditSlot(QNetworkReply *reply)
     response_data=reply->readAll();
     qDebug()<<"DATA : "+response_data;
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
-    QJsonArray json_array = json_doc.array();
-    qDebug()<<  json_array;
+
+    //QJsonArray json_array = json_doc.array();
+    //qDebug()<<  json_array;
+    QJsonObject json_obj;
+    json_obj = json_doc.object();
+
+    QJsonValue jsonVal;
+    jsonVal = json_obj.value("idaccount");
+    emit cardSelectSignal(jsonVal.toString());
+}
+
+void CardSelect::handleWebToken(QString token)
+{
+    webToken = token;
 }
 
 void CardSelect::on_btnDebitSelect_clicked()
@@ -30,6 +45,15 @@ void CardSelect::on_btnDebitSelect_clicked()
 
     QString site_url="http://localhost:3000/debit/" + cardnumber;
     QNetworkRequest request((site_url));
+
+
+    //WEBTOKEN ALKU
+    qDebug() << webToken;
+    qDebug() << webToken.toUtf8();
+    QByteArray myToken="Bearer "+ webToken.toUtf8();
+    request.setRawHeader(QByteArray("Authorization"),(myToken));
+    //WEBTOKEN LOPPU
+
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     cardSelectManager = new QNetworkAccessManager(this);

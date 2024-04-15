@@ -20,23 +20,18 @@ class BankMenuWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit BankMenuWindow(QWidget *parent = nullptr);
+    explicit BankMenuWindow(QWidget *parent = nullptr, QString token = 0);
     ~BankMenuWindow();
 
 private slots:
     void buttonHandler();
-
-    void on_btnWithdraw_clicked();
-
-    void on_btnDeposit_clicked();
-
-    void on_btnBalance_clicked();
 
 private:
     Ui::BankMenuWindow *ui;
     WithdrawMoneyWindow *withmoneyw;
     DebositMoneyWindow *depomoneyw;
     ShowBalanceWindow *showbalaw;
+    QString webToken;
 };
 
 #endif // BANKMENUWINDOW_H

@@ -1,13 +1,13 @@
 #ifndef WITHDRAWMONEYWINDOW_H
 #define WITHDRAWMONEYWINDOW_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui {
 class WithdrawMoneyWindow;
 }
 
-class WithdrawMoneyWindow : public QWidget
+class WithdrawMoneyWindow : public QDialog
 {
     Q_OBJECT
 

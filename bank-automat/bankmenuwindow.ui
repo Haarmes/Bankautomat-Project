@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="btnBalance">
+   <widget class="QPushButton" name="balance">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -40,7 +40,7 @@
      <string>Tilitapahtumat</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnWithdraw">
+   <widget class="QPushButton" name="withdraw">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -66,7 +66,7 @@
      <string>Kirjaudu Ulos</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnDeposit">
+   <widget class="QPushButton" name="deposit">
     <property name="geometry">
      <rect>
       <x>20</x>

@@ -1,13 +1,13 @@
 #ifndef SHOWBALANCEWINDOW_H
 #define SHOWBALANCEWINDOW_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui {
 class ShowBalanceWindow;
 }
 
-class ShowBalanceWindow : public QWidget
+class ShowBalanceWindow : public QDialog
 {
     Q_OBJECT
 

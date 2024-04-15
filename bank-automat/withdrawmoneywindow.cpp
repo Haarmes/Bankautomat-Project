@@ -2,7 +2,7 @@
 #include "ui_withdrawmoneywindow.h"
 
 WithdrawMoneyWindow::WithdrawMoneyWindow(QWidget *parent)
-    : QWidget(parent)
+    : QDialog(parent)
     , ui(new Ui::WithdrawMoneyWindow)
 {
     ui->setupUi(this);

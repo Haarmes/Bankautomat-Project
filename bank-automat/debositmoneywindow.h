@@ -1,13 +1,13 @@
 #ifndef DEBOSITMONEYWINDOW_H
 #define DEBOSITMONEYWINDOW_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui {
 class DebositMoneyWindow;
 }
 
-class DebositMoneyWindow : public QWidget
+class DebositMoneyWindow : public QDialog
 {
     Q_OBJECT
 

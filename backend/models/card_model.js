@@ -6,7 +6,7 @@ const card = {
         return db.query("SELECT * from card", callback)
     },
     getOneCard(id, callback) {
-        return db.query("SELECT * from card WHERE idcard=?", [id], callback);
+        return db.query("SELECT * from card WHERE cardnumber=?", [id], callback);
     },
     addCard(newCard, callback) {
         bcrypt.hash(newCard.pin, 10, function (err, hashedPin) {
