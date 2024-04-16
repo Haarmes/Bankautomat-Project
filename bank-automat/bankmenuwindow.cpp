@@ -1,14 +1,14 @@
 #include "bankmenuwindow.h"
 #include "ui_bankmenuwindow.h"
 
-BankMenuWindow::BankMenuWindow(QWidget *parent, QString token)
+BankMenuWindow::BankMenuWindow(QWidget *parent, QString token, QString id)
     : QMainWindow(parent)
     , ui(new Ui::BankMenuWindow)
 {
     ui->setupUi(this);
 
     webToken = token;
-
+    idaccount = id;
 
     const QStringList buttonList = {"btnWithdraw", "btnDeposit", "btnBalance", "btnTransaction", "btnLogout"};
 
@@ -24,13 +24,13 @@ BankMenuWindow::BankMenuWindow(QWidget *parent, QString token)
     qDebug() << "BankMenuWindow Constructed";
 }
 
-BankMenuWindow::~BankMenuWindow()
+BankMenuWindow::~BankMenuWindow(void)
 {
     delete ui;
     qDebug() << "BankMenuWindow Destructed";
 }
 
-void BankMenuWindow::buttonHandler()
+void BankMenuWindow::buttonHandler(void)
 {
     QPushButton * button = qobject_cast<QPushButton*>(sender());
     QString name = button->objectName();
@@ -44,7 +44,7 @@ void BankMenuWindow::buttonHandler()
     else if(name == "btnDeposit")
     {
         qDebug() << "Button pressed: " << name;
-        depomoneyw = new DebositMoneyWindow(this); // Deposite money window
+        depomoneyw = new DebositMoneyWindow(this); // Deposit money window
         depomoneyw->show();
     }
     else if(name == "btnBalance")
@@ -56,14 +56,12 @@ void BankMenuWindow::buttonHandler()
     else if(name == "btnTransaction")
     {
         qDebug() << "Button pressed: " << name;
-        showtransw = new TransactionWindow(this, webToken); // Show Balance window
+        showtransw = new TransactionWindow(this, webToken, idaccount); // Show Transaction window
         showtransw->show();
     }
     else if(name == "btnLogout")
     {
         qDebug() << "Button pressed: " << name;
+        qApp->quit();
     }
 }
-
-
-

@@ -18,13 +18,13 @@ class TransactionWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit TransactionWindow(QWidget *parent = nullptr, QString token = 0);
-    ~TransactionWindow();
+    explicit TransactionWindow(QWidget *parent = nullptr, QString token = 0, QString id = "0");
+    ~TransactionWindow(void);
 
 private slots:
     void getTransactionSlot(QNetworkReply *reply);
-    void on_btnNewer_clicked();
-    void on_btnOlder_clicked();
+    void on_btnNewer_clicked(void);
+    void on_btnOlder_clicked(void);
 
 private:
     Ui::TransactionWindow *ui;
@@ -32,7 +32,8 @@ private:
     QNetworkAccessManager *getManager;
     QNetworkReply *reply;
     QByteArray response_data;
-    QString offsetString = "0";
+    QString offsetString;
+    QString idaccountString;
     QString transactionArr[20];
     QString webToken;
 
