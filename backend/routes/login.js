@@ -15,7 +15,7 @@ router.post('/', function (request, response) {
                 if (err.errno = -4078) {
                     console.log("tietokanta alhaalla");
                     console.log(err)
-                    response.send(false);
+                    response.json({ errorreason: "Tietokanta alhaalla" });
                 }
                 else {
                     console.log("Error checkpasswordissa");
@@ -30,7 +30,7 @@ router.post('/', function (request, response) {
                             console.log("kirjautuminen ok");
                             console.log(compareResult);
                             const token = genToken({ cardnumber: request.body.cardnumber });
-                            response.send(token);
+                            response.json({ conToken: token });
                         }
                         else {
                             console.log(err);

@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/login', loginRouter); //login pitää olla enne authentikaatio vaatimista
 
-//app.use(authenticateToken);     //tämän jälkeiset reitit vaativat authentikaation
+app.use(authenticateToken);     //tämän jälkeiset reitit vaativat authentikaation
 
 app.use('/useraccount', userAccRouter);
 app.use('/account', accountRouter);
@@ -44,7 +44,8 @@ app.use('/credit', creditRouter);
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
-
+    console.log(req.headers)
+    console.log(authHeader)
     console.log("token = " + token);
     if (token == null) return res.sendStatus(401)
 

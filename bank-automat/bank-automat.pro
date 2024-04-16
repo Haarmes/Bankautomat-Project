@@ -47,3 +47,8 @@ win32: LIBS += -L$$PWD/../dll_folder/rfid_dll/build/debug/ -lrfid_dll
 
 INCLUDEPATH += $$PWD/../dll_folder/rfid_dll
 DEPENDPATH += $$PWD/../dll_folder/rfid_dll
+
+win32: LIBS += -L$$PWD/../dll_folder/pinUIDLL/build/debug/ -lpinUIDLL
+
+INCLUDEPATH += $$PWD/../dll_folder/pinUIDLL
+DEPENDPATH += $$PWD/../dll_folder/pinUIDLL

@@ -1,5 +1,6 @@
 
 QT += gui
+QT += core
 QT += widgets
 TEMPLATE = lib
 DEFINES += PINUIDLL_LIBRARY
