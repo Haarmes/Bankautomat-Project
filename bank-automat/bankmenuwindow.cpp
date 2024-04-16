@@ -56,6 +56,8 @@ void BankMenuWindow::buttonHandler()
     else if(name == "btnTransaction")
     {
         qDebug() << "Button pressed: " << name;
+        showtransw = new TransactionWindow(this); // Show Balance window
+        showtransw->show();
     }
     else if(name == "btnLogout")
     {
@@ -64,8 +66,4 @@ void BankMenuWindow::buttonHandler()
 }
 
 
-void BankMenuWindow::on_btnTransaction_clicked()
-{
-    showtransw = new TransactionWindow(); // Show Transaction window
-    showtransw->show();
-}
+

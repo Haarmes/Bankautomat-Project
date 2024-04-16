@@ -3,7 +3,7 @@
 #include <string>
 
 TransactionWindow::TransactionWindow(QWidget *parent)
-    : QWidget(parent)
+    : QDialog(parent)
     , ui(new Ui::TransactionWindow)
 {
     ui->setupUi(this);

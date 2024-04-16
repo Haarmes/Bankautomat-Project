@@ -20,7 +20,7 @@ public:
 
 private:
     QSerialPort * _serial;
-    QString portname = "COM3";      // Tähän laitetaan oikea portin numero
+    QString portname = "COM5";      // Tähän laitetaan oikea portin numero
 signals:
     void rfidSignal(QString);
 
