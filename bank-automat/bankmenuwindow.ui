@@ -20,11 +20,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-
-   <widget class="QPushButton" name="btnBalance">
-
    <widget class="QLabel" name="bankMenuLabel">
-
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -45,21 +41,7 @@
      </font>
     </property>
     <property name="text">
-
-     <string>Tilitapahtumat</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnWithdraw">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>40</y>
-      <width>161</width>
-      <height>61</height>
-     </rect>
-
      <string>Päävalikko</string>
-
     </property>
     <property name="alignment">
      <set>Qt::AlignBottom|Qt::AlignHCenter</set>
@@ -90,11 +72,7 @@
      <string>Kirjaudu Ulos</string>
     </property>
    </widget>
-
-   <widget class="QPushButton" name="btnDeposit">
-
    <widget class="QWidget" name="">
-
     <property name="geometry">
      <rect>
       <x>10</x>

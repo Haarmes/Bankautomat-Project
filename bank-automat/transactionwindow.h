@@ -1,7 +1,7 @@
 #ifndef TRANSACTIONWINDOW_H
 #define TRANSACTIONWINDOW_H
 
-#include <QWidget>
+#include <QDialog>
 #include <QDebug>
 #include <QStandardItemModel>
 #include <QtNetwork>
@@ -13,7 +13,7 @@ namespace Ui {
 class TransactionWindow;
 }
 
-class TransactionWindow : public QWidget
+class TransactionWindow : public QDialog
 {
     Q_OBJECT
 
