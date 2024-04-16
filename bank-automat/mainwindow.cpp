@@ -37,7 +37,7 @@ void MainWindow::handlePinUi(QString pinnumber)
 
     // laitetaan parametrin json objektiin
     QJsonObject jsonObj;
-    jsonObj.insert("cardnumber", 22222222);
+    jsonObj.insert("cardnumber", cardNumber);
     jsonObj.insert("password", pinNumber);
 
 
@@ -95,9 +95,8 @@ void MainWindow::loginSlot(QNetworkReply *reply)
         qDebug() << jsonVal.toString();
         webToken = jsonVal.toString();
 
-        QString site_url2="http://localhost:3000/card/22222222";
+        QString site_url2="http://localhost:3000/card/" + cardNumber;
         QNetworkRequest request2((site_url2));
-
         //WEBTOKEN ALKU
 
         QByteArray myToken="Bearer " + webToken.toUtf8();

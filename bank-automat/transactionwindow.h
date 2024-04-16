@@ -18,7 +18,7 @@ class TransactionWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit TransactionWindow(QWidget *parent = nullptr);
+    explicit TransactionWindow(QWidget *parent = nullptr, QString token = 0);
     ~TransactionWindow();
 
 private slots:
@@ -34,6 +34,7 @@ private:
     QByteArray response_data;
     QString offsetString = "0";
     QString transactionArr[20];
+    QString webToken;
 
     void getTransactionsByOffset(void);
     void setTransactions(void);
