@@ -2,13 +2,15 @@
 #include "ui_transactionwindow.h"
 #include <string>
 
-TransactionWindow::TransactionWindow(QWidget *parent, QString token)
+TransactionWindow::TransactionWindow(QWidget *parent, QString token, QString id)
     : QDialog(parent)
     , ui(new Ui::TransactionWindow)
 {
     ui->setupUi(this);
     qDebug() << "TransactionWindow Constructed";
     webToken = token;
+    idaccountString = id;
+    offsetString = "0";
 
     model->setRowCount(10); // 10 rows
     model->setColumnCount(2); // 2 columns (amount, date)
@@ -20,7 +22,7 @@ TransactionWindow::TransactionWindow(QWidget *parent, QString token)
     getTransactionsByOffset();
 }
 
-TransactionWindow::~TransactionWindow()
+TransactionWindow::~TransactionWindow(void)
 {
     delete ui;
     delete model;
@@ -33,14 +35,13 @@ TransactionWindow::~TransactionWindow()
 
 void TransactionWindow::getTransactionsByOffset(void)
 {
-    // Tee iduser automaattisesti lisättäväksi!
-    QString site_url = "http://localhost:3000/transaction/history/1?offset=" + offsetString;
+    QString site_url = "http://localhost:3000/transaction/history/" + idaccountString + "?offset=" + offsetString;
     QNetworkRequest request(site_url);
 
-
-    QByteArray myToken="Bearer "+webToken.toUtf8();
+    // TOKEN START
+    QByteArray myToken="Bearer " + webToken.toUtf8();
     request.setRawHeader(QByteArray("Authorization"),(myToken));
-
+    // TOKEN END
 
     getManager = new QNetworkAccessManager(this);
     connect(getManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getTransactionSlot(QNetworkReply*)));
@@ -89,7 +90,7 @@ void TransactionWindow::setTransactions(void)
 
 // BUTTON HANDLING
 
-void TransactionWindow::on_btnNewer_clicked()
+void TransactionWindow::on_btnNewer_clicked(void)
 {
     if((offsetString.toInt() - 10) >= 0)
     {
@@ -101,7 +102,7 @@ void TransactionWindow::on_btnNewer_clicked()
     getTransactionsByOffset();
 }
 
-void TransactionWindow::on_btnOlder_clicked()
+void TransactionWindow::on_btnOlder_clicked(void)
 {
     int offset = offsetString.toInt() + 10; // adding offset by 10
     qDebug() << "offsetvalue: " + QString::number(offset);
@@ -109,4 +110,3 @@ void TransactionWindow::on_btnOlder_clicked()
 
     getTransactionsByOffset();
 }
-
