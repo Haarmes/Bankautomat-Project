@@ -18,7 +18,7 @@ class CardSelect : public QDialog
     Q_OBJECT
 
 public:
-    explicit CardSelect(QWidget *parent = nullptr, QString token = "0");
+    explicit CardSelect(QWidget *parent = nullptr, QString token = "0", QString cardnumber = 0);
     ~CardSelect();
 
 private slots:
@@ -34,6 +34,7 @@ private:
     QNetworkReply *reply;
     QByteArray response_data;
     QString webToken;
+    QString cardNumber;
 
 signals:
     void cardSelectSignal(QString);

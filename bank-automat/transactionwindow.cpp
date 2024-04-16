@@ -2,12 +2,13 @@
 #include "ui_transactionwindow.h"
 #include <string>
 
-TransactionWindow::TransactionWindow(QWidget *parent)
+TransactionWindow::TransactionWindow(QWidget *parent, QString token)
     : QDialog(parent)
     , ui(new Ui::TransactionWindow)
 {
     ui->setupUi(this);
     qDebug() << "TransactionWindow Constructed";
+    webToken = token;
 
     model->setRowCount(10); // 10 rows
     model->setColumnCount(2); // 2 columns (amount, date)
@@ -36,10 +37,10 @@ void TransactionWindow::getTransactionsByOffset(void)
     QString site_url = "http://localhost:3000/transaction/history/1?offset=" + offsetString;
     QNetworkRequest request(site_url);
 
-    /* //WEBTOKEN ALKU
-    QByteArray myToken="Bearer "+webToken;
+
+    QByteArray myToken="Bearer "+webToken.toUtf8();
     request.setRawHeader(QByteArray("Authorization"),(myToken));
-    //WEBTOKEN LOPPU */
+
 
     getManager = new QNetworkAccessManager(this);
     connect(getManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getTransactionSlot(QNetworkReply*)));
