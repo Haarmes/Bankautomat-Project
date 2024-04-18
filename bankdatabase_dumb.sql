@@ -40,7 +40,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES (1,'12345',855.00,NULL),(2,'11111',49000.00,NULL),(3,'141414141',600.00,1000);
+INSERT INTO `account` VALUES (1,'12345',0.00,NULL),(2,'11111',48400.00,NULL),(3,'141414141',600.00,1000);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +116,7 @@ CREATE TABLE `transaction` (
   PRIMARY KEY (`transactionid`),
   KEY `fk-transaction-account_idx` (`idaccount`),
   CONSTRAINT `fk-transaction-account` FOREIGN KEY (`idaccount`) REFERENCES `account` (`idaccount`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +125,7 @@ CREATE TABLE `transaction` (
 
 LOCK TABLES `transaction` WRITE;
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
-INSERT INTO `transaction` VALUES (1,1,100.00,'2024-05-19 10:00:00',NULL),(2,2,200.00,'2024-02-10 00:00:00',NULL),(3,3,300.00,'2024-03-10 00:00:00',NULL),(4,1,50.00,'2024-01-11 00:00:00',NULL),(5,1,20.00,'2023-02-03 00:00:00',NULL),(6,1,10.00,'2022-01-02 00:00:00',NULL),(7,1,5.00,'2021-02-02 00:00:00',NULL),(8,1,15.00,'2020-01-01 00:00:00',NULL),(9,1,200.00,'2024-04-05 17:34:36','nosto'),(10,1,200.00,'2024-04-05 17:35:34','nosto'),(11,2,200.00,'2024-04-05 17:35:56','nosto'),(12,2,200.00,'2024-04-05 17:38:37','nosto'),(13,2,200.00,'2024-04-05 17:38:38','nosto'),(14,1,200.00,'2024-04-05 17:38:58','nosto'),(15,1,200.00,'2024-04-05 17:38:59','nosto'),(16,3,200.00,'2024-04-05 17:44:44','nosto'),(17,3,801.00,'2024-04-05 17:48:39','nostoCredit'),(18,3,200.00,'2024-04-08 11:07:31','nostoDebit'),(19,3,801.00,'2024-04-08 11:07:49','nostoCredit'),(20,1,1.00,'2024-04-08 11:51:31','nostoDebit'),(21,1,1.00,'2024-04-08 12:12:33','nostoDebit'),(22,1,10.00,'2024-04-08 12:32:33','nostoDebit'),(23,1,9.00,'2024-04-08 12:34:03','nostoDebit'),(24,2,400.00,'2024-04-08 12:34:47','nostoDebit'),(25,1,5.00,'2024-04-08 12:35:49','nostoCredit'),(26,1,5.00,'2024-04-08 12:39:24','nostoDebit'),(27,1,5.00,'2024-04-08 12:41:23','nostoDebit'),(28,1,5.00,'2024-04-08 12:45:37','nostoCredit'),(29,1,5.00,'2024-04-08 15:15:48','nostoDebit'),(30,3,5.00,'2024-04-08 15:20:56','nostoCredit'),(31,3,5.00,'2024-04-08 15:21:06','nostoCredit'),(32,3,5.00,'2024-04-08 15:26:47','nostoCredit'),(33,1,100.00,'2024-04-08 15:38:41','Rahan talletus'),(34,1,100.00,'2024-04-08 15:39:11','Rahan talletus'),(35,3,5.00,'2024-04-08 15:42:21','Rahan talletus'),(36,3,5.00,'2024-04-08 15:43:27','Rahan talletus'),(37,3,5.00,'2024-04-08 15:43:35','Rahan talletus');
+INSERT INTO `transaction` VALUES (1,1,100.00,'2024-05-19 10:00:00',NULL),(2,2,200.00,'2024-02-10 00:00:00',NULL),(3,3,300.00,'2024-03-10 00:00:00',NULL),(4,1,50.00,'2024-01-11 00:00:00',NULL),(5,1,20.00,'2023-02-03 00:00:00',NULL),(6,1,10.00,'2022-01-02 00:00:00',NULL),(7,1,5.00,'2021-02-02 00:00:00',NULL),(8,1,15.00,'2020-01-01 00:00:00',NULL),(9,1,200.00,'2024-04-05 17:34:36','nosto'),(10,1,200.00,'2024-04-05 17:35:34','nosto'),(11,2,200.00,'2024-04-05 17:35:56','nosto'),(12,2,200.00,'2024-04-05 17:38:37','nosto'),(13,2,200.00,'2024-04-05 17:38:38','nosto'),(14,1,200.00,'2024-04-05 17:38:58','nosto'),(15,1,200.00,'2024-04-05 17:38:59','nosto'),(16,3,200.00,'2024-04-05 17:44:44','nosto'),(17,3,801.00,'2024-04-05 17:48:39','nostoCredit'),(18,3,200.00,'2024-04-08 11:07:31','nostoDebit'),(19,3,801.00,'2024-04-08 11:07:49','nostoCredit'),(20,1,1.00,'2024-04-08 11:51:31','nostoDebit'),(21,1,1.00,'2024-04-08 12:12:33','nostoDebit'),(22,1,10.00,'2024-04-08 12:32:33','nostoDebit'),(23,1,9.00,'2024-04-08 12:34:03','nostoDebit'),(24,2,400.00,'2024-04-08 12:34:47','nostoDebit'),(25,1,5.00,'2024-04-08 12:35:49','nostoCredit'),(26,1,5.00,'2024-04-08 12:39:24','nostoDebit'),(27,1,5.00,'2024-04-08 12:41:23','nostoDebit'),(28,1,5.00,'2024-04-08 12:45:37','nostoCredit'),(29,1,5.00,'2024-04-08 15:15:48','nostoDebit'),(30,3,5.00,'2024-04-08 15:20:56','nostoCredit'),(31,3,5.00,'2024-04-08 15:21:06','nostoCredit'),(32,3,5.00,'2024-04-08 15:26:47','nostoCredit'),(33,1,100.00,'2024-04-08 15:38:41','Rahan talletus'),(34,1,100.00,'2024-04-08 15:39:11','Rahan talletus'),(35,3,5.00,'2024-04-08 15:42:21','Rahan talletus'),(36,3,5.00,'2024-04-08 15:43:27','Rahan talletus'),(37,3,5.00,'2024-04-08 15:43:35','Rahan talletus'),(38,1,5.00,'2024-04-11 14:54:53','nostoDebit'),(39,1,20.00,'2024-04-11 15:08:28','nostoDebit'),(40,1,20.00,'2024-04-11 15:09:05','nostoDebit'),(41,2,200.00,'2024-04-15 10:33:54','nostoDebit'),(42,2,20.00,'2024-04-15 10:56:28','nostoDebit'),(43,2,20.00,'2024-04-15 10:57:54','nostoDebit'),(44,2,40.00,'2024-04-15 10:58:02','nostoDebit'),(45,2,20.00,'2024-04-15 11:00:05','nostoDebit'),(46,2,20.00,'2024-04-15 11:03:47','nostoDebit'),(47,2,20.00,'2024-04-15 11:09:36','nostoDebit'),(48,2,20.00,'2024-04-15 11:37:07','nostoDebit'),(49,2,20.00,'2024-04-15 11:38:23','nostoDebit'),(50,2,40.00,'2024-04-15 11:38:24','nostoDebit'),(51,2,20.00,'2024-04-15 11:42:50','nostoDebit'),(52,2,40.00,'2024-04-15 11:42:55','nostoDebit'),(53,2,20.00,'2024-04-15 11:46:17','nostoDebit'),(54,1,800.00,'2024-04-15 11:47:25','nostoDebit'),(55,2,20.00,'2024-04-15 11:47:38','nostoDebit'),(56,2,20.00,'2024-04-15 11:49:06','nostoDebit'),(57,2,20.00,'2024-04-15 11:49:46','nostoDebit'),(58,1,10.00,'2024-04-15 11:51:33','nostoDebit'),(59,2,20.00,'2024-04-15 11:51:50','nostoDebit'),(60,2,20.00,'2024-04-15 11:51:58','nostoDebit');
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -231,18 +231,32 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `nostoDebit`(IN first_id INT, IN nosto decimal(10,2))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `nostoDebit`(IN first_id INT, IN nosto DECIMAL(10,2))
 BEGIN 
-	DECLARE test1 INT DEFAULT 0;
-	START TRANSACTION;
-	UPDATE account SET saldo=saldo-nosto WHERE idaccount=first_id AND saldo>= nosto;
-    SET test1=ROW_COUNT();
-    IF (test1 > 0) THEN
-		COMMIT;
-		INSERT INTO transaction (idaccount, amount, date, transaction_type) VALUES (first_id, nosto, NOW(), 'nostoDebit'); 
+    DECLARE test1 INT DEFAULT 0;
+    DECLARE saldo DECIMAL(10,2);
+    
+    -- Haetaan tilin saldo
+    SELECT saldo INTO saldo FROM account WHERE idaccount = first_id;
+    
+    -- Tarkistetaan, onko nosto mahdollinen
+    IF saldo >= nosto THEN
+        START TRANSACTION;
+        UPDATE account SET saldo = saldo - nosto WHERE idaccount = first_id;
+        SET test1 = ROW_COUNT();
+        
+        IF (test1 > 0) THEN
+            -- Nosto onnistui, tehdään tarvittavat toimenpiteet ja tehdään COMMIT
+            COMMIT;
+            INSERT INTO transaction (idaccount, amount, date, transaction_type) VALUES (first_id, nosto, NOW(), 'nostoDebit');
+        ELSE
+            -- Nostoa ei voitu suorittaa, tehdään ROLLBACK
+            ROLLBACK;
+        END IF;
     ELSE
-		ROLLBACK;
-	END IF;
+        -- Nosto on suurempi kuin saldo, palautetaan virheviesti
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Liian vähän rahaa';
+    END IF;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -334,4 +348,8 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+<<<<<<< HEAD
+-- Dump completed on 2024-04-15 12:22:33
+=======
 -- Dump completed on 2024-04-16 14:49:31
+>>>>>>> main
