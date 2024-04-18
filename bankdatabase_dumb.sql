@@ -1,4 +1,6 @@
--- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `bankdatabase` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `bankdatabase`;
+-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: bankdatabase
 -- ------------------------------------------------------
@@ -83,10 +85,9 @@ CREATE TABLE `card` (
   `cardnumber` varchar(20) DEFAULT NULL,
   `doublecard` tinyint(1) DEFAULT NULL,
   `pin` varchar(255) DEFAULT NULL,
-  `idaccount` int DEFAULT NULL,
   PRIMARY KEY (`idcard`),
   UNIQUE KEY `idcard_UNIQUE` (`idcard`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +96,7 @@ CREATE TABLE `card` (
 
 LOCK TABLES `card` WRITE;
 /*!40000 ALTER TABLE `card` DISABLE KEYS */;
-INSERT INTO `card` VALUES (1,'123445678',0,'$2a$10$eq9KSgeB7dgF0XZsaKpMd.iQq/ecsEQhUMD7mpoSe18yrh/UESAI6',NULL),(2,'11111111',1,'$2a$10$/zUmVh7Nc7IfpPZV6ts3E.u1OkyTfEupYm3ydFIV9mVDax0pHh2P.',NULL);
+INSERT INTO `card` VALUES (1,'123445678',0,'$2a$10$eq9KSgeB7dgF0XZsaKpMd.iQq/ecsEQhUMD7mpoSe18yrh/UESAI6'),(2,'11111111',1,'$2a$10$/zUmVh7Nc7IfpPZV6ts3E.u1OkyTfEupYm3ydFIV9mVDax0pHh2P.'),(3,'6000626A',0,'$2a$10$64cRCo3zPGd50RZwtcnvUufRt0CI018k/6a6ys1XLh99wXK4l43z2'),(4,'60005431',0,'$2a$10$K3bm8i9QadOCGVITQaPHHO9K4mw4KNI4KJF2MU1Jm6YQdseVr3zqK'),(5,'6000D8A8',1,'$2a$10$qiVQ9JB2iWVsQ/A32eGFfOlhtkpBpVXGKpZPBdu3S.dKqCvhErHkG');
 /*!40000 ALTER TABLE `card` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -327,10 +328,10 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `transactionHistory`(IN account_id INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `transactionHistory`(IN account_id INT, IN offset_val INT)
 BEGIN 
 SELECT date AS 'Tapahtuma aika', amount AS 'Summa' FROM bankdatabase.transaction WHERE idaccount = account_id ORDER BY date DESC
-LIMIT 10;
+LIMIT 10 OFFSET offset_val;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -347,4 +348,8 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+<<<<<<< HEAD
 -- Dump completed on 2024-04-15 12:22:33
+=======
+-- Dump completed on 2024-04-16 14:49:31
+>>>>>>> main

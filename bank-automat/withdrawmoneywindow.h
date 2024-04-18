@@ -1,6 +1,7 @@
 #ifndef WITHDRAWMONEYWINDOW_H
 #define WITHDRAWMONEYWINDOW_H
 
+<<<<<<< HEAD
 #include <QWidget>
 #include <QDebug>
 #include <QtNetwork>
@@ -8,12 +9,15 @@
 #include <QJsonDocument>
 #include <QTimer>
 #include <QMessageBox>
+=======
+#include <QDialog>
+>>>>>>> main
 
 namespace Ui {
 class WithdrawMoneyWindow;
 }
 
-class WithdrawMoneyWindow : public QWidget
+class WithdrawMoneyWindow : public QDialog
 {
     Q_OBJECT
 

@@ -2,7 +2,7 @@
 #include "ui_showbalancewindow.h"
 
 ShowBalanceWindow::ShowBalanceWindow(QWidget *parent)
-    : QWidget(parent)
+    : QDialog(parent)
     , ui(new Ui::ShowBalanceWindow)
 {
     ui->setupUi(this);

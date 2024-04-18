@@ -27,12 +27,12 @@ const account = {
     //Tuplakortti hakuja
     getOneDebit(cardnumber, callback) {
         console.log("debit get");
-        return db.query("SELECT * FROM account INNER JOIN accountcard ON account.idaccount = accountcard.idaccount INNER JOIN card on accountcard.idcard= card.idcard WHERE cardlimit = 0 AND cardnumber=?", [cardnumber], callback)
+        return db.query("SELECT account.idaccount FROM account INNER JOIN accountcard ON account.idaccount = accountcard.idaccount INNER JOIN card on accountcard.idcard= card.idcard WHERE cardlimit = 0 AND cardnumber=?", [cardnumber], callback)
     },
 
     getOneCredit(cardnumber, callback) {
         console.log("credit get");
-        return db.query("SELECT * FROM account INNER JOIN accountcard ON account.idaccount = accountcard.idaccount INNER JOIN card on accountcard.idcard= card.idcard WHERE NOT cardlimit = 0 AND cardnumber=?", [cardnumber], callback)
+        return db.query("SELECT account.idaccount FROM account INNER JOIN accountcard ON account.idaccount = accountcard.idaccount INNER JOIN card on accountcard.idcard= card.idcard WHERE NOT cardlimit = 0 AND cardnumber=?", [cardnumber], callback)
     },
   
     // nosto procedure

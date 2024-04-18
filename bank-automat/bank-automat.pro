@@ -1,5 +1,9 @@
 QT       += core gui serialport network
+<<<<<<< HEAD
 QT += network
+=======
+QT       += network
+>>>>>>> main
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,6 +20,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     showbalancewindow.cpp \
+    transactionwindow.cpp \
     withdrawmoneywindow.cpp
 
 HEADERS += \
@@ -24,6 +29,7 @@ HEADERS += \
     debositmoneywindow.h \
     mainwindow.h \
     showbalancewindow.h \
+    transactionwindow.h \
     withdrawmoneywindow.h
 
 FORMS += \
@@ -32,6 +38,7 @@ FORMS += \
     debositmoneywindow.ui \
     mainwindow.ui \
     showbalancewindow.ui \
+    transactionwindow.ui \
     withdrawmoneywindow.ui
 
 # Default rules for deployment.
@@ -45,8 +52,15 @@ win32: LIBS += -L$$PWD/../dll_folder/rfid_dll/build/debug/ -lrfid_dll
 INCLUDEPATH += $$PWD/../dll_folder/rfid_dll
 DEPENDPATH += $$PWD/../dll_folder/rfid_dll
 
+<<<<<<< HEAD
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../dll_folder/rfid_dll/build/release/ -lrfid_dll
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../dll_folder/rfid_dll/build/debug/ -lrfid_dll
 
 INCLUDEPATH += $$PWD/../dll_folder/rfid_dll/build/debug
 DEPENDPATH += $$PWD/../dll_folder/rfid_dll/build/debug
+=======
+win32: LIBS += -L$$PWD/../dll_folder/pinUIDLL/build/debug/ -lpinUIDLL
+
+INCLUDEPATH += $$PWD/../dll_folder/pinUIDLL
+DEPENDPATH += $$PWD/../dll_folder/pinUIDLL
+>>>>>>> main

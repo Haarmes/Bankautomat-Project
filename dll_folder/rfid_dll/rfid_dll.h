@@ -19,7 +19,7 @@ public:
     void rfidDisconnect();
 
 private:
-    QSerialPort *_serial;
+    QSerialPort * _serial;
     QString portname = "COM5";      // Tähän laitetaan oikea portin numero
 signals:
     void rfidSignal(QString);

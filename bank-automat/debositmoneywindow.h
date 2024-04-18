@@ -1,6 +1,7 @@
 #ifndef DEBOSITMONEYWINDOW_H
 #define DEBOSITMONEYWINDOW_H
 
+<<<<<<< HEAD
 #include <QWidget>
 #include <QtNetwork>
 #include <QNetworkAccessManager>
@@ -8,12 +9,15 @@
 #include <QTimer>
 #include <QMessageBox>
 
+=======
+#include <QDialog>
+>>>>>>> main
 
 namespace Ui {
 class DebositMoneyWindow;
 }
 
-class DebositMoneyWindow : public QWidget
+class DebositMoneyWindow : public QDialog
 {
     Q_OBJECT
 
