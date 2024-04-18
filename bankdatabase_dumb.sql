@@ -1,6 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `bankdatabase` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `bankdatabase`;
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: bankdatabase
 -- ------------------------------------------------------
@@ -187,7 +185,7 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'bankdatabase'
 --
-/*!50003 DROP PROCEDURE IF EXISTS `nostoCredit` */;
+/*!50003 DROP PROCEDURE IF EXISTS `nosto` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -197,65 +195,23 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `nostoCredit`(IN first_id INT, IN nosto decimal(10,2))
-BEGIN 
-	DECLARE test1 INT DEFAULT 0;
-    DECLARE card_limit INT;
-	SELECT cardlimit INTO card_limit FROM account WHERE idaccount = first_id;
-	IF card_limit <> 0 THEN
-	START TRANSACTION;
-	UPDATE account SET saldo=saldo-nosto WHERE idaccount=first_id AND saldo + cardlimit >= nosto;
-    SET test1=ROW_COUNT();
-    IF (test1 > 0) THEN
-			COMMIT;
-			INSERT INTO transaction (idaccount, amount, date, transaction_type) VALUES (first_id, nosto, NOW(), 'nostoCredit'); 
-		ELSE
-			ROLLBACK;
-		END IF;
-    ELSE
-		ROLLBACK;
-	END IF;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `nostoDebit` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `nostoDebit`(IN first_id INT, IN nosto DECIMAL(10,2))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `nosto`(IN first_id INT, IN nosto decimal(10,2))
 BEGIN 
     DECLARE test1 INT DEFAULT 0;
-    DECLARE saldo DECIMAL(10,2);
-    
-    -- Haetaan tilin saldo
-    SELECT saldo INTO saldo FROM account WHERE idaccount = first_id;
-    
-    -- Tarkistetaan, onko nosto mahdollinen
-    IF saldo >= nosto THEN
-        START TRANSACTION;
-        UPDATE account SET saldo = saldo - nosto WHERE idaccount = first_id;
-        SET test1 = ROW_COUNT();
-        
-        IF (test1 > 0) THEN
-            -- Nosto onnistui, tehdään tarvittavat toimenpiteet ja tehdään COMMIT
-            COMMIT;
-            INSERT INTO transaction (idaccount, amount, date, transaction_type) VALUES (first_id, nosto, NOW(), 'nostoDebit');
-        ELSE
-            -- Nostoa ei voitu suorittaa, tehdään ROLLBACK
-            ROLLBACK;
-        END IF;
+    DECLARE card_limit INT;
+    START TRANSACTION;
+    SELECT cardlimit INTO card_limit FROM account WHERE idaccount = first_id;
+    IF card_limit > 0 THEN
+        UPDATE account SET saldo = saldo - nosto WHERE idaccount = first_id AND saldo + card_limit >= nosto;
     ELSE
-        -- Nosto on suurempi kuin saldo, palautetaan virheviesti
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Liian vähän rahaa';
+        UPDATE account SET saldo = saldo - nosto WHERE idaccount = first_id AND saldo >= nosto;
+    END IF;
+    SET test1 = ROW_COUNT();
+    IF test1 > 0 THEN
+        COMMIT;
+        INSERT INTO transaction (idaccount, amount, date, transaction_type) VALUES (first_id, nosto, NOW(), IF(card_limit > 0, 'nostoCredit', 'nostoDebit')); 
+    ELSE
+        ROLLBACK;
     END IF;
 END ;;
 DELIMITER ;
@@ -348,8 +304,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-<<<<<<< HEAD
--- Dump completed on 2024-04-15 12:22:33
-=======
--- Dump completed on 2024-04-16 14:49:31
->>>>>>> main
+-- Dump completed on 2024-04-18 12:14:28
