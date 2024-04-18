@@ -41,7 +41,7 @@
      </widget>
     </item>
     <item alignment="Qt::AlignHCenter">
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="label_withDraw">
       <property name="text">
        <string>Valitse Summa</string>
       </property>
@@ -50,21 +50,21 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="btn_withdraw_20">
         <property name="text">
          <string>20e</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="btn_withdraw_40">
         <property name="text">
          <string>40e</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="btn_withdraw_60">
         <property name="text">
          <string>60e</string>
         </property>
@@ -75,21 +75,21 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QPushButton" name="pushButton_4">
+       <widget class="QPushButton" name="btn_withdraw_100">
         <property name="text">
          <string>100e</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_5">
+       <widget class="QPushButton" name="btn_withdraw_200">
         <property name="text">
          <string>200e</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_6">
+       <widget class="QPushButton" name="btn_withdraw_500">
         <property name="text">
          <string>500e</string>
         </property>
@@ -98,7 +98,7 @@
      </layout>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_7">
+     <widget class="QPushButton" name="btn_withdraw_return">
       <property name="text">
        <string>Palaa Takaisin</string>
       </property>

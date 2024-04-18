@@ -35,14 +35,11 @@ const account = {
         return db.query("SELECT * FROM account INNER JOIN accountcard ON account.idaccount = accountcard.idaccount INNER JOIN card on accountcard.idcard= card.idcard WHERE NOT cardlimit = 0 AND cardnumber=?", [cardnumber], callback)
     },
   
-    // nostoDebit procedure
-    updateDebitSaldoProcedureById(id, nosto, callback) {
-        return db.query("Call nostoDebit(?,?)", [id, nosto], callback);
+    // nosto procedure
+    updateNostoProcedureById(id, nosto, callback) {
+        return db.query("Call nosto(?,?)", [id, nosto], callback);
     },
-    // nostoCredit procedure
-    updateCreditSaldoProcedureById(id, nosto, callback) {
-        return db.query("Call nostoCredit(?,?)", [id, nosto], callback);
-    },
+
     // Talletus procedure
     updateTalletusProcedureById(id, talletus, callback) {
         return db.query("Call talletus(?,?)", [id, talletus], callback);

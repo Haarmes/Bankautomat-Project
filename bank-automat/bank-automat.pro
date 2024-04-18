@@ -1,4 +1,5 @@
 QT       += core gui serialport network
+QT += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -43,3 +44,9 @@ win32: LIBS += -L$$PWD/../dll_folder/rfid_dll/build/debug/ -lrfid_dll
 
 INCLUDEPATH += $$PWD/../dll_folder/rfid_dll
 DEPENDPATH += $$PWD/../dll_folder/rfid_dll
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../dll_folder/rfid_dll/build/release/ -lrfid_dll
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../dll_folder/rfid_dll/build/debug/ -lrfid_dll
+
+INCLUDEPATH += $$PWD/../dll_folder/rfid_dll/build/debug
+DEPENDPATH += $$PWD/../dll_folder/rfid_dll/build/debug
