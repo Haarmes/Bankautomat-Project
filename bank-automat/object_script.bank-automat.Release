@@ -1,0 +1,15 @@
+release/bankmenuwindow.o
+release/cardselect.o
+release/debositmoneywindow.o
+release/main.o
+release/mainwindow.o
+release/showbalancewindow.o
+release/transactionwindow.o
+release/withdrawmoneywindow.o
+release/moc_bankmenuwindow.o
+release/moc_cardselect.o
+release/moc_debositmoneywindow.o
+release/moc_mainwindow.o
+release/moc_showbalancewindow.o
+release/moc_transactionwindow.o
+release/moc_withdrawmoneywindow.o
