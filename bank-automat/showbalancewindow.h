@@ -37,6 +37,8 @@ private:
     QString userId;
     QStandardItemModel *model; // Model for the table view
 
+    void setTransactions(const QJsonArray& transactionsArray);
+
 };
 
 #endif // SHOWBALANCEWINDOW_H
