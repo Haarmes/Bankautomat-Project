@@ -22,6 +22,11 @@ const account = {
     getSaldoProcedureById(id, callback) {
         return db.query("CALL saldoProcedure(?)", [id], callback);
     },
+    
+    //saldo procedure for saldoWindow
+    getUserSaldo(id, callback) {
+        return db.query("CALL getUserSaldo(?)", [id], callback);
+    },
 
 
     //Tuplakortti hakuja
