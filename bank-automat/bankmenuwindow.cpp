@@ -9,6 +9,7 @@ BankMenuWindow::BankMenuWindow(QWidget *parent, QString token, QString id)
 
     webToken = token;
     idaccount = id;
+    connect(this, SIGNAL(signalLogout()), this->parent(), SLOT(handleLogout()));
 
     const QStringList buttonList = {"btnWithdraw", "btnDeposit", "btnBalance", "btnTransaction", "btnLogout"};
 
@@ -38,30 +39,32 @@ void BankMenuWindow::buttonHandler(void)
     if(name == "btnWithdraw")
     {
         qDebug() << "Button pressed: " << name;
-        withmoneyw = new WithdrawMoneyWindow(this); // Withdraw money window
-        withmoneyw->show();
+        withmoneyw = new WithdrawMoneyWindow(this, webToken, idaccount); // Withdraw money window
+        withmoneyw->showFullScreen();
     }
     else if(name == "btnDeposit")
     {
         qDebug() << "Button pressed: " << name;
-        depomoneyw = new DebositMoneyWindow(this); // Deposit money window
-        depomoneyw->show();
+        depomoneyw = new DebositMoneyWindow(this, webToken, idaccount); // Deposit money window
+        depomoneyw->showFullScreen();
     }
     else if(name == "btnBalance")
     {
         qDebug() << "Button pressed: " << name;
-        showbalaw = new ShowBalanceWindow(this, webToken, idaccount ); // Show Balance window
-        showbalaw->show();
+        showbalaw = new ShowBalanceWindow(this); // Show Balance window
+        showbalaw->showFullScreen();
+
     }
     else if(name == "btnTransaction")
     {
         qDebug() << "Button pressed: " << name;
         showtransw = new TransactionWindow(this, webToken, idaccount); // Show Transaction window
-        showtransw->show();
+        showtransw->showFullScreen();
     }
     else if(name == "btnLogout")
     {
         qDebug() << "Button pressed: " << name;
-        qApp->quit();
+        emit signalLogout();
+        //qApp->quit();
     }
 }

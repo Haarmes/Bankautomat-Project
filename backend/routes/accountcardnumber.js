@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
-const credit = require('../models/account_model');
+const accountcard = require('../models/account_model');
 
 
 
-//Get One credit account
+//Get One debit account
 router.get('/:id', function (request, response) {
-    credit.getOneCredit(request.params.id, function (err, result) {
+    console.log("kaatuu?")
+    accountcard.getOneAccountWithCardNumber(request.params.id, function (err, result) {
         if (err) {
             response.send(err);
         }

@@ -2,16 +2,16 @@
 #define WITHDRAWMONEYWINDOW_H
 
 
+
 #include <QWidget>
+
 #include <QDebug>
 #include <QtNetwork>
 #include <QNetworkAccessManager>
 #include <QJsonDocument>
 #include <QTimer>
 #include <QMessageBox>
-
 #include <QDialog>
-
 
 namespace Ui {
 class WithdrawMoneyWindow;
@@ -22,7 +22,7 @@ class WithdrawMoneyWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit WithdrawMoneyWindow(QWidget *parent = nullptr);
+    explicit WithdrawMoneyWindow(QWidget *parent = nullptr, QString token = 0, QString id = 0);
     ~WithdrawMoneyWindow();
 
 private slots:
@@ -51,6 +51,7 @@ private:
 
     QString withDrawAmount;
     QString accId;
+    QString webToken;
     QTimer *timer;
 };
 
