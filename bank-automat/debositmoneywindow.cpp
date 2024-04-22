@@ -2,14 +2,14 @@
 #include "ui_debositmoneywindow.h"
 
 
-DebositMoneyWindow::DebositMoneyWindow(QWidget *parent)
+DebositMoneyWindow::DebositMoneyWindow(QWidget *parent, QString token, QString id)
     : QDialog(parent)
     , ui(new Ui::DebositMoneyWindow)
 {
     ui->setupUi(this);
     qDebug() << "Deposit Money Constructor" ;
-
-    accId = "1";
+    webToken = token;
+    accId = id;
 
     //timer = new QTimer(this);
     //timer->setInterval(10000);
@@ -41,8 +41,8 @@ void DebositMoneyWindow::on_btn_deposit_20_clicked()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     //webtoken tähän alas
-    //QByteArray myToken = "Bearer " +webToken;
-    //request.setRawHeader(QByteArray("Authorization"),(myToken));
+    QByteArray myToken = "Bearer " +webToken.toUtf8();
+    request.setRawHeader(QByteArray("Authorization"),(myToken));
 
     putManager = new QNetworkAccessManager(this);
     connect(putManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateBalanceSLotD(QNetworkReply*)));
@@ -68,8 +68,8 @@ void DebositMoneyWindow::on_btn_deposit_40_clicked()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     //webtoken tähän alas
-    //QByteArray myToken = "Bearer " +webToken;
-    //request.setRawHeader(QByteArray("Authorization"),(myToken));
+    QByteArray myToken = "Bearer " +webToken.toUtf8();
+    request.setRawHeader(QByteArray("Authorization"),(myToken));
 
     putManager = new QNetworkAccessManager(this);
     connect(putManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateBalanceSLotD(QNetworkReply*)));
@@ -95,8 +95,8 @@ void DebositMoneyWindow::on_btn_deposit_60_clicked()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     //webtoken tähän alas
-    //QByteArray myToken = "Bearer " +webToken;
-    //request.setRawHeader(QByteArray("Authorization"),(myToken));
+    QByteArray myToken = "Bearer " +webToken.toUtf8();
+    request.setRawHeader(QByteArray("Authorization"),(myToken));
 
     putManager = new QNetworkAccessManager(this);
     connect(putManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateBalanceSLotD(QNetworkReply*)));
@@ -122,8 +122,8 @@ void DebositMoneyWindow::on_btn_deposit_100_clicked()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     //webtoken tähän alas
-    //QByteArray myToken = "Bearer " +webToken;
-    //request.setRawHeader(QByteArray("Authorization"),(myToken));
+    QByteArray myToken = "Bearer " +webToken.toUtf8();
+    request.setRawHeader(QByteArray("Authorization"),(myToken));
 
     putManager = new QNetworkAccessManager(this);
     connect(putManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateBalanceSLotD(QNetworkReply*)));
@@ -149,8 +149,8 @@ void DebositMoneyWindow::on_btn_deposit_200_clicked()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     //webtoken tähän alas
-    //QByteArray myToken = "Bearer " +webToken;
-    //request.setRawHeader(QByteArray("Authorization"),(myToken));
+    QByteArray myToken = "Bearer " +webToken.toUtf8();
+    request.setRawHeader(QByteArray("Authorization"),(myToken));
 
     putManager = new QNetworkAccessManager(this);
     connect(putManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateBalanceSLotD(QNetworkReply*)));
@@ -176,8 +176,8 @@ void DebositMoneyWindow::on_btn_deposit_500_clicked()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     //webtoken tähän alas
-    //QByteArray myToken = "Bearer " +webToken;
-    //request.setRawHeader(QByteArray("Authorization"),(myToken));
+    QByteArray myToken = "Bearer " +webToken.toUtf8();
+    request.setRawHeader(QByteArray("Authorization"),(myToken));
 
     putManager = new QNetworkAccessManager(this);
     connect(putManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateBalanceSLotD(QNetworkReply*)));

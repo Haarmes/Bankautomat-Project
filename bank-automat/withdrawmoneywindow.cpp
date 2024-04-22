@@ -2,14 +2,14 @@
 #include "ui_withdrawmoneywindow.h"
 
 
-WithdrawMoneyWindow::WithdrawMoneyWindow(QWidget *parent)
+WithdrawMoneyWindow::WithdrawMoneyWindow(QWidget *parent, QString token, QString id)
     : QDialog(parent)
     , ui(new Ui::WithdrawMoneyWindow)
 {
     ui->setupUi(this);
     qDebug() << "Withdraw Money Constructor" ;
-
-    accId = "1";
+    webToken = token;
+    accId = id;
 
     //timer = new QTimer(this);
     //timer->setInterval(10000);
@@ -40,8 +40,8 @@ void WithdrawMoneyWindow::on_btn_withdraw_20_clicked()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     //webtoken tähän alas
-    //QByteArray myToken = "Bearer " +webToken;
-    //request.setRawHeader(QByteArray("Authorization"),(myToken));
+    QByteArray myToken = "Bearer " +webToken.toUtf8();
+    request.setRawHeader(QByteArray("Authorization"),(myToken));
 
     putManager = new QNetworkAccessManager(this);
     connect(putManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateBalanceSLotW(QNetworkReply*)));
@@ -67,8 +67,8 @@ void WithdrawMoneyWindow::on_btn_withdraw_40_clicked()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     //webtoken tähän alas
-    //QByteArray myToken = "Bearer " +webToken;
-    //request.setRawHeader(QByteArray("Authorization"),(myToken));
+    QByteArray myToken = "Bearer " +webToken.toUtf8();
+    request.setRawHeader(QByteArray("Authorization"),(myToken));
 
     putManager = new QNetworkAccessManager(this);
     connect(putManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateBalanceSLotW(QNetworkReply*)));
@@ -95,8 +95,8 @@ void WithdrawMoneyWindow::on_btn_withdraw_60_clicked()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     //webtoken tähän alas
-    //QByteArray myToken = "Bearer " +webToken;
-    //request.setRawHeader(QByteArray("Authorization"),(myToken));
+    QByteArray myToken = "Bearer " +webToken.toUtf8();
+    request.setRawHeader(QByteArray("Authorization"),(myToken));
 
     putManager = new QNetworkAccessManager(this);
     connect(putManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateBalanceSLotW(QNetworkReply*)));
@@ -123,8 +123,8 @@ void WithdrawMoneyWindow::on_btn_withdraw_100_clicked()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     //webtoken tähän alas
-    //QByteArray myToken = "Bearer " +webToken;
-    //request.setRawHeader(QByteArray("Authorization"),(myToken));
+    QByteArray myToken = "Bearer " +webToken.toUtf8();
+    request.setRawHeader(QByteArray("Authorization"),(myToken));
 
     putManager = new QNetworkAccessManager(this);
     connect(putManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateBalanceSLotW(QNetworkReply*)));
@@ -151,8 +151,8 @@ void WithdrawMoneyWindow::on_btn_withdraw_200_clicked()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     //webtoken tähän alas
-    //QByteArray myToken = "Bearer " +webToken;
-    //request.setRawHeader(QByteArray("Authorization"),(myToken));
+    QByteArray myToken = "Bearer " +webToken.toUtf8();
+    request.setRawHeader(QByteArray("Authorization"),(myToken));
 
     putManager = new QNetworkAccessManager(this);
     connect(putManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateBalanceSLotW(QNetworkReply*)));
@@ -179,8 +179,8 @@ void WithdrawMoneyWindow::on_btn_withdraw_500_clicked()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     //webtoken tähän alas
-    //QByteArray myToken = "Bearer " +webToken;
-    //request.setRawHeader(QByteArray("Authorization"),(myToken));
+    QByteArray myToken = "Bearer " +webToken.toUtf8();
+    request.setRawHeader(QByteArray("Authorization"),(myToken));
 
     putManager = new QNetworkAccessManager(this);
     connect(putManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateBalanceSLotW(QNetworkReply*)));

@@ -12,7 +12,7 @@ router.get('/:id', function (request, response) {
         }
         else {
             console.log(result);
-            response.json(result);
+            response.json(result[0]);
         }
     });
 });

@@ -26,13 +26,13 @@ void CardSelect::creditSlot(QNetworkReply *reply)
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
 
     //QJsonArray json_array = json_doc.array();
-    //qDebug()<<  json_array;
     QJsonObject json_obj;
     json_obj = json_doc.object();
-
     QJsonValue jsonVal;
-    jsonVal = json_obj.value("idaccount");
-    emit cardSelectSignal(jsonVal.toString());
+    jsonVal = json_obj.value(QString("idaccount"));
+    short accountidNumber = jsonVal.toInt();
+    QString accountidString = QString::number(accountidNumber);
+    emit cardSelectSignal(accountidString);
 }
 
 void CardSelect::handleWebToken(QString token)
@@ -42,7 +42,6 @@ void CardSelect::handleWebToken(QString token)
 
 void CardSelect::on_btnDebitSelect_clicked()
 {
-    //QString cardnumber = "1111111";
 
     QString site_url="http://localhost:3000/debit/" + cardNumber;
     QNetworkRequest request((site_url));

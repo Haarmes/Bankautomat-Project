@@ -1,17 +1,14 @@
 #ifndef DEBOSITMONEYWINDOW_H
 #define DEBOSITMONEYWINDOW_H
 
-<<<<<<< HEAD
-#include <QWidget>
+
 #include <QtNetwork>
 #include <QNetworkAccessManager>
 #include <QJsonDocument>
 #include <QTimer>
 #include <QMessageBox>
-
-=======
 #include <QDialog>
->>>>>>> main
+
 
 namespace Ui {
 class DebositMoneyWindow;
@@ -22,7 +19,7 @@ class DebositMoneyWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit DebositMoneyWindow(QWidget *parent = nullptr);
+    explicit DebositMoneyWindow(QWidget *parent = nullptr, QString token = 0, QString id = 0);
     ~DebositMoneyWindow();
 
 private slots:
@@ -49,6 +46,7 @@ private:
     QByteArray response_data;
 
     QString accId;
+    QString webToken;
     QString depositAmount;
     QTimer *timer;
 };

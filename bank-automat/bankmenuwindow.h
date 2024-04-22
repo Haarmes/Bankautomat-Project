@@ -34,6 +34,9 @@ private:
     TransactionWindow *showtransw;
     QString webToken;
     QString idaccount;
+
+signals:
+    void signalLogout();
 };
 
 #endif // BANKMENUWINDOW_H

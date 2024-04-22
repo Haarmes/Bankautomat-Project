@@ -10,6 +10,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ptr_rfiddll = new Rfid_dll(this);     //Luodaan uusi rfid olio (dll kansiossa sijaitsee)
     ptr_rfiddll->rfidConnect(); //yhdistetään tai "avataan" rfid portti. eli laite on luku tilassa
+    attemptsLeft = 3;
+    connect(this, SIGNAL(signalSingleCard(QString)), this, SLOT(handleCardSelect(QString)));
+    connect(this, SIGNAL(signalPinLogout()), this, SLOT(handleLogout()));
 }
 
 MainWindow::~MainWindow()
@@ -25,7 +28,8 @@ void MainWindow::handleRfid(QString cardnumber)
     qDebug() << cardnumber;
     cardNumber = cardnumber;
     ptr_pinui = new pinUI(this);
-    ptr_pinui->show();
+    ptr_pinui->showFullScreen();
+    ptr_rfiddll->rfidDisconnect();
 
 }
 
@@ -52,11 +56,41 @@ void MainWindow::handlePinUi(QString pinnumber)
 
 void MainWindow::handleCardSelect(QString accountnumber)
 {
+    accountNumber = accountnumber;
     qDebug()<<" Handling card select";
-    bankmenuw = new BankMenuWindow(this, webToken); // bankmenuwindow
-    bankmenuw->show();
+    bankmenuw = new BankMenuWindow(this, webToken, accountnumber); // bankmenuwindow
+    bankmenuw->showFullScreen();
     accountNumber = accountnumber;
 
+}
+
+void MainWindow::handleLogout()
+{
+
+    //Tarkistetaan onko ikkunoita olemassa ennen poistamista
+    if(bankmenuw != nullptr){
+        delete bankmenuw;
+        bankmenuw = nullptr;
+    }
+
+    if(ptr_pinui != nullptr){
+        delete ptr_pinui;
+        ptr_pinui = nullptr;
+    }
+
+    if(cardSelectW != nullptr){
+        delete cardSelectW;
+        cardSelectW = nullptr;
+    }
+
+    //Alustetaan arvoja
+    attemptsLeft = 3;
+    cardNumber = "";
+    pinNumber = "";
+    webToken = "";
+    accountNumber = "";
+
+    ptr_rfiddll->rfidConnect(); // käynnistetään kortin lukija
 }
 
 void MainWindow::loginSlot(QNetworkReply *reply)
@@ -65,6 +99,14 @@ void MainWindow::loginSlot(QNetworkReply *reply)
     qDebug()<<"DATA : "+response_data;
     if(response_data == "false"){
         qDebug()<< "False tuli";
+        attemptsLeft = attemptsLeft - 1;
+        if(attemptsLeft == 0){
+            emit signalPinLogout();
+        }
+        QMessageBox msgBox;
+        msgBox.setText("Yrityksiä jäljellä: "+ QString::number(attemptsLeft));
+        //msgBox.setInformativeText("Yrityksiä jäljellä: "+ attemptsLeft);
+        msgBox.exec();
     }
 
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
@@ -76,6 +118,7 @@ void MainWindow::loginSlot(QNetworkReply *reply)
 
     QJsonValue jsonVal;
     jsonVal = json_obj.value("errorreason");
+    qDebug() << jsonVal;
     if(jsonVal.toString() == ""){
         qDebug() << "ei err reasonia";
     }
@@ -128,14 +171,28 @@ void MainWindow::cardGetSlot(QNetworkReply *reply2)
     jsonVal = json_obj.value("doublecard");
     if(jsonVal.toInt() == 1){
         qDebug() << "1";
-        cardSelectW = new CardSelect(this, webToken); // cardSelectWindow
-        cardSelectW->show();
+        cardSelectW = new CardSelect(this, webToken, cardNumber); // cardSelectWindow
+        cardSelectW->showFullScreen();
     }
     else{
         qDebug() << "Ei ole tuplakortti";
-        qDebug() << jsonVal.toString();
-        bankmenuw = new BankMenuWindow(this, webToken); // bankmenuwindow
-        bankmenuw->show();
+
+
+        QString site_url3="http://localhost:3000/accountcardnumber/" + cardNumber;
+        QNetworkRequest request3((site_url3));
+
+
+        //WEBTOKEN ALKU
+        QByteArray myToken="Bearer "+ webToken.toUtf8();
+        request3.setRawHeader(QByteArray("Authorization"),(myToken));
+        //WEBTOKEN LOPPU
+
+        request3.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+        accountGetManager = new QNetworkAccessManager(this);
+        connect(accountGetManager, SIGNAL(finished (QNetworkReply*)), this, SLOT(accountGetSlot(QNetworkReply*)));
+
+        reply3 = accountGetManager->get(request3);
 
 
     }
@@ -143,17 +200,38 @@ void MainWindow::cardGetSlot(QNetworkReply *reply2)
     cardGetManager->deleteLater();
 }
 
+void MainWindow::accountGetSlot(QNetworkReply *reply3)
+{
+    qDebug() << "AccountGetSlot";
+    response_data=reply3->readAll();
+    qDebug()<<"DATA : "+response_data;
+    QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
+
+    //QJsonArray json_array = json_doc.array();
+    QJsonObject json_obj;
+    json_obj = json_doc.object();
+    QJsonValue jsonVal;
+    jsonVal = json_obj.value(QString("idaccount"));
+    short accountidNumber = jsonVal.toInt();
+    QString accountidString = QString::number(accountidNumber);
+    emit signalSingleCard(accountidString);
+
+    reply3->deleteLater();
+    accountGetManager->deleteLater();
+}
+
 
 void MainWindow::on_btnTempOpenBankMenuUI_clicked()
 {
     bankmenuw = new BankMenuWindow(this, webToken); // bankmenuwindow
-    bankmenuw->show();
+    bankmenuw->showFullScreen();
+    //bankmenuw->move(500,500);
 }
 
 
 void MainWindow::on_btnTempOpenCardSelectUI_clicked()
 {
     cardSelectW = new CardSelect(this, webToken); // cardSelectWindow
-    cardSelectW->show();
+    cardSelectW->showFullScreen();
 }
 

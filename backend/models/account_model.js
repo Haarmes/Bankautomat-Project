@@ -23,6 +23,11 @@ const account = {
         return db.query("CALL saldoProcedure(?)", [id], callback);
     },
 
+    //Account haku kortinnumerolla
+    getOneAccountWithCardNumber(cardnumber, callback) {
+        console.log("accountnumber with cardnumber GET");
+        return db.query("SELECT account.idaccount FROM account INNER JOIN accountcard ON account.idaccount = accountcard.idaccount INNER JOIN card on accountcard.idcard= card.idcard WHERE cardnumber=?", [cardnumber], callback)
+    },
 
     //Tuplakortti hakuja
     getOneDebit(cardnumber, callback) {
@@ -34,7 +39,7 @@ const account = {
         console.log("credit get");
         return db.query("SELECT account.idaccount FROM account INNER JOIN accountcard ON account.idaccount = accountcard.idaccount INNER JOIN card on accountcard.idcard= card.idcard WHERE NOT cardlimit = 0 AND cardnumber=?", [cardnumber], callback)
     },
-  
+
     // nosto procedure
     updateNostoProcedureById(id, nosto, callback) {
         return db.query("Call nosto(?,?)", [id, nosto], callback);

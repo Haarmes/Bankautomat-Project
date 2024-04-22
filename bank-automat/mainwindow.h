@@ -32,10 +32,12 @@ public slots:
     void handleRfid(QString);
     void handlePinUi(QString);
     void handleCardSelect(QString);
+    void handleLogout();
 
 private slots:
     void loginSlot(QNetworkReply *reply);
     void cardGetSlot(QNetworkReply *reply2);
+    void accountGetSlot(QNetworkReply *reply3);
 
     //Väliaikaiset napit. poistetaan lopullisesta
     void on_btnTempOpenBankMenuUI_clicked();
@@ -44,12 +46,12 @@ private slots:
 private:
     //ikkunat
     Ui::MainWindow * ui;
-    BankMenuWindow * bankmenuw;
-    CardSelect * cardSelectW;
+    BankMenuWindow * bankmenuw = nullptr;
+    CardSelect * cardSelectW = nullptr;
 
     //dll
     Rfid_dll * ptr_rfiddll;
-    pinUI * ptr_pinui;
+    pinUI * ptr_pinui = nullptr;
 
     //muuttujia
     short attemptsLeft;
@@ -58,15 +60,20 @@ private:
     QString webToken;
     QString accountNumber;
 
+
     //network
     QNetworkAccessManager *loginManager;
     QNetworkAccessManager *cardGetManager;
+    QNetworkAccessManager *accountGetManager;
     QNetworkReply *reply;
     QNetworkReply *reply2;
+    QNetworkReply *reply3;
     QByteArray response_data;
 
 signals:
     void signalWebToken(QString);
+    void signalSingleCard(QString);
+    void signalPinLogout();
 
 };
 #endif // MAINWINDOW_H
