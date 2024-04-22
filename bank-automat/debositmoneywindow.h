@@ -2,6 +2,8 @@
 #define DEBOSITMONEYWINDOW_H
 
 
+
+#include <QWidget>
 #include <QtNetwork>
 #include <QNetworkAccessManager>
 #include <QJsonDocument>

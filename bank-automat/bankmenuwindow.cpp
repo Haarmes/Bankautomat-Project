@@ -53,6 +53,7 @@ void BankMenuWindow::buttonHandler(void)
         qDebug() << "Button pressed: " << name;
         showbalaw = new ShowBalanceWindow(this); // Show Balance window
         showbalaw->showFullScreen();
+
     }
     else if(name == "btnTransaction")
     {

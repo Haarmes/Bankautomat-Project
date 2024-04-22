@@ -2,6 +2,9 @@
 #define WITHDRAWMONEYWINDOW_H
 
 
+
+#include <QWidget>
+
 #include <QDebug>
 #include <QtNetwork>
 #include <QNetworkAccessManager>
