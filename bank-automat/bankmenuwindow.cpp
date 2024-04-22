@@ -50,7 +50,7 @@ void BankMenuWindow::buttonHandler(void)
     else if(name == "btnBalance")
     {
         qDebug() << "Button pressed: " << name;
-        showbalaw = new ShowBalanceWindow(this); // Show Balance window
+        showbalaw = new ShowBalanceWindow(this, webToken, idaccount ); // Show Balance window
         showbalaw->show();
     }
     else if(name == "btnTransaction")

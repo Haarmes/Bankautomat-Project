@@ -80,6 +80,18 @@ router.get('/saldo/:id', function(request, response) {
     });
 });
 
+//procedure for saldo window
+router.get('/saldo/:userId/transactions', function(request, response) {
+    account.getSaldoProcedureById(request.params.id, function(err, result){
+        if(err){
+            response.send(err);
+        }
+        else{
+            const firstResult = Array.isArray(result) ? result[0] : result;
+            response.json(firstResult);
+        }
+    });
+});
 
 // procedure Nosto
 router.put('/Nosto/:id/:amount', function(request, response) {
